@@ -27,10 +27,11 @@ export default function LandingPage() {
   }, [])
 
   const satelliteImages = [
-    "/images/beautiful-view-water-near-forest-with-green-yellow-trees.jpg",
-    "/images/forest.jpg",
-    "/images/green-trees-near-lake-mountain-blue-sky-daytime.jpg",
-    "/images/matthew-smith-Rfflri94rs8-unsplash.jpg",
+    "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200&h=800&fit=crop&auto=format&q=80",
+    "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=1200&h=800&fit=crop&auto=format&q=80",
+    "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1200&h=800&fit=crop&auto=format&q=80",
+    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&h=800&fit=crop&auto=format&q=80",
+ 
   ]
 
   const features = [
@@ -142,121 +143,134 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen mist-gradient relative overflow-hidden">
       {/* Hero Section with ImagesSlider - Clean, no leaves */}
-      <section className="relative h-screen">
-        <ImagesSlider 
-          className="h-screen" 
-          images={satelliteImages}
-          autoplay={true}
-          direction="right"
+
+<section className="relative h-[93vh]">
+  <ImagesSlider 
+    className="h-full w-full"   
+    images={satelliteImages}
+    autoplay={true}
+    direction="right"
+  >
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: -80,
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+      }}
+      transition={{
+        duration: 0.6,
+      }}
+      className="z-50 flex flex-col justify-center items-center text-center px-4"
+    >
+      {/* Animated logo/icon */}
+      <motion.div 
+        className="flex justify-center mb-8"
+        animate={{
+          scale: [1, 1.05, 1],
+          rotate: [0, 2, -2, 0],
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      >
+        <div className="w-24 h-24 nature-gradient rounded-3xl flex items-center justify-center border-4 border-white/30 shadow-2xl nature-glow">
+          <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </div>
+      </motion.div>
+
+      <motion.h1 
+        className="text-5xl sm:text-7xl lg:text-8xl font-bold mb-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.8 }}
+      >
+        <span className="text-white drop-shadow-2xl">MISFR</span>
+        <motion.span 
+          className="block text-green-100 mt-3 text-3xl sm:text-4xl lg:text-5xl"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
         >
-          <motion.div
-            initial={{
-              opacity: 0,
-              y: -80,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            transition={{
-              duration: 0.6,
-            }}
-            className="z-50 flex flex-col justify-center items-center text-center px-4"
-          >
-            {/* Animated logo/icon */}
-            <motion.div 
-              className="flex justify-center mb-8"
-              animate={{
-                scale: [1, 1.05, 1],
-                rotate: [0, 2, -2, 0],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              <div className="w-24 h-24 nature-gradient rounded-3xl flex items-center justify-center border-4 border-white/30 shadow-2xl nature-glow">
-                <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-              </div>
-            </motion.div>
+          Geospatial Intelligence Platform
+        </motion.span>
+      </motion.h1>
 
-            <motion.h1 
-              className="text-5xl sm:text-7xl lg:text-8xl font-bold mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-            >
-              <span className="text-white drop-shadow-2xl">MISFR</span>
-              <motion.span 
-                className="block text-green-100 mt-3 text-3xl sm:text-4xl lg:text-5xl"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4, duration: 0.8 }}
-              >
-                Geospatial Intelligence Platform
-              </motion.span>
-            </motion.h1>
+      <motion.p 
+        className="text-xl sm:text-2xl text-green-50 mb-12 max-w-4xl mx-auto leading-relaxed drop-shadow-lg"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6, duration: 0.8 }}
+      >
+        Harness the power of satellite imagery and advanced mapping tools for comprehensive geospatial analysis and environmental monitoring.
+      </motion.p>
 
-            <motion.p 
-              className="text-xl sm:text-2xl text-green-50 mb-12 max-w-4xl mx-auto leading-relaxed drop-shadow-lg"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-            >
-              Harness the power of satellite imagery and advanced mapping tools for comprehensive geospatial analysis and environmental monitoring.
-            </motion.p>
-
-            <motion.div 
-              className="flex flex-col sm:flex-row gap-6 justify-center items-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.8 }}
-            >
-              <Link
-                href="/map"
-                className="nature-button text-white px-12 py-6 rounded-3xl font-bold text-xl hover:scale-105 transition-all duration-300 shadow-2xl group flex items-center space-x-3"
-              >
-                <span>Launch Geoportal</span>
-                <svg className="w-7 h-7 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </Link>
-              <Link
-                href="#features"
-                className="bg-transparent border-3 border-white text-white px-12 py-6 rounded-3xl font-bold text-xl hover:bg-white/20 transition-all duration-300 backdrop-blur-sm float-animation"
-              >
-                Learn More
-              </Link>
-            </motion.div>
-          </motion.div>
-        </ImagesSlider>
-        
-        {/* Enhanced scroll indicator */}
-        <motion.div 
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white"
-          animate={{
-            y: [0, 10, 0],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
+      <motion.div 
+        className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8, duration: 0.8 }}
+      >
+        <Link
+          href="/map"
+          className="nature-button text-white px-12 py-6 rounded-3xl font-bold text-xl hover:scale-105 transition-all duration-300 shadow-2xl group flex items-center space-x-3"
         >
-          <Link href="#features" className="flex flex-col items-center">
-            <span className="text-sm mb-2 text-white/80 font-medium">Explore Nature's Insights</span>
-            <div className="bg-white/20 backdrop-blur-sm rounded-full p-3 hover:bg-white/30 transition-colors">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-              </svg>
-            </div>
-          </Link>
-        </motion.div>
-      </section>
+          <span>Launch Geoportal</span>
+          <svg className="w-7 h-7 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </Link>
+        <Link
+          href="#features"
+          className="bg-transparent border-3 border-white text-white px-12 py-6 rounded-3xl font-bold text-xl hover:bg-white/20 transition-all duration-300 backdrop-blur-sm float-animation"
+        >
+          Learn More
+        </Link>
+      </motion.div>
+    </motion.div>
+  </ImagesSlider>
+  
+  {/* Enhanced scroll indicator - positioned below the buttons */}
+ {/* Enhanced scroll indicator - properly centered */}
+<motion.div 
+  className="absolute bottom-8 left-0 right-0 flex justify-center text-white z-50"
+  animate={{
+    y: [0, 10, 0],
+  }}
+  transition={{
+    duration: 2,
+    repeat: Infinity,
+    ease: "easeInOut"
+  }}
+>
+  <button 
+    onClick={() => {
+      const element = document.getElementById('features');
+      if (element) {
+        element.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }}
+    className="flex flex-col items-center bg-transparent border-none cursor-pointer"
+  >
+    <span className="text-sm mb-2 text-white/80 font-medium">Explore Nature's Insights</span>
+    <div className="bg-white/20 backdrop-blur-sm rounded-full p-3 hover:bg-white/30 transition-colors">
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+      </svg>
+    </div>
+  </button>
+</motion.div>
+</section>
 
       {/* Enhanced Features Section - Evenly Distributed Leaves */}
       <section id="features" className="py-24 relative">
@@ -297,20 +311,20 @@ export default function LandingPage() {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div 
-            className="text-center mb-20"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-800 mb-6">
-              Powerful Features for <span className="nature-gradient bg-clip-text text-transparent">Environmental Analysis</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Everything you need to analyze satellite data and create insightful environmental maps
-            </p>
-          </motion.div>
+         <motion.div 
+  className="text-center mb-20"
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6 }}
+  viewport={{ once: true }}
+>
+  <h2 className="text-4xl sm:text-5xl font-bold text-gray-800 mb-6">
+    Powerful Features for <span className="bg-gradient-to-r from-green-600 to-emerald-700 bg-clip-text text-transparent">Environmental Analysis</span>
+  </h2>
+  <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+    Everything you need to analyze satellite data and create insightful environmental maps
+  </p>
+</motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
