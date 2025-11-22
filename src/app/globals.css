@@ -1,0 +1,441 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Nature-Inspired Color Palette */
+:root {
+  --forest-green: #2d5016;
+  --earth-green: #4a7c28;
+  --sage-green: #87a96b;
+  --moss-green: #8fbc8f;
+  --earth-brown: #6b4423;
+  --bark-brown: #8b6239;
+  --soil-brown: #c4a57b;
+  --sky-blue: #87ceeb;
+  --leaf-yellow: #9acd32;
+  --sunrise-orange: #ff8c42;
+  --mist-gray: #f5f5dc;
+  --shadow-green: #1a3d0a;
+  --forest-canopy: #228b22;
+  --earth-ochre: #cd853f;
+  --moss-velvet: #5f9ea0;
+  --leaf-emerald: #50c878;
+  --bark-charcoal: #36454f;
+  --forest-mist: #f0fff0;
+  --nature-cream: #faf0e6;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f4f0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--earth-green);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--forest-green);
+}
+
+/* Body background with subtle nature gradient */
+body {
+  background: linear-gradient(135deg, var(--forest-mist) 0%, #e8f5e8 25%, var(--nature-cream) 50%, #f0f8f0 75%, #e6f3e6 100%);
+  min-height: 100vh;
+}
+
+/* Leaflet styles */
+@import 'leaflet/dist/leaflet.css';
+@import 'leaflet-draw/dist/leaflet.draw.css';
+
+/* Fix for default markers */
+.leaflet-default-icon-path {
+  background-image: url('https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png');
+}
+
+/* Ensure Leaflet controls are visible */
+.leaflet-control-container {
+  z-index: 1000;
+}
+
+.leaflet-draw-toolbar {
+  z-index: 1001;
+}
+
+/* Fix for drawing controls visibility */
+.leaflet-draw-section {
+  display: block !important;
+}
+
+.leaflet-draw-toolbar a {
+  background-color: var(--mist-gray) !important;
+  border: 1px solid var(--earth-green) !important;
+  border-radius: 6px !important;
+  color: var(--forest-green) !important;
+}
+
+.leaflet-draw-toolbar a:hover {
+  background-color: var(--sage-green) !important;
+  border-color: var(--earth-green) !important;
+}
+
+/* Make sure controls are above other elements */
+.leaflet-top, .leaflet-bottom {
+  z-index: 1000;
+}
+
+.leaflet-control {
+  z-index: 1001;
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-green {
+  0%, 100% { 
+    box-shadow: 0 0 0 0 rgba(74, 124, 40, 0.7);
+  }
+  50% { 
+    box-shadow: 0 0 0 15px rgba(74, 124, 40, 0);
+  }
+}
+
+@keyframes leaf-sway {
+  0%, 100% { transform: rotate(-3deg) translateY(0px); }
+  25% { transform: rotate(1deg) translateY(-3px); }
+  50% { transform: rotate(3deg) translateY(0px); }
+  75% { transform: rotate(-1deg) translateY(-2px); }
+}
+
+@keyframes leaf-fall {
+  0% { 
+    transform: translateY(-100px) rotate(0deg); 
+    opacity: 0;
+  }
+  10% { opacity: 0.3; }
+  90% { opacity: 0.3; }
+  100% { 
+    transform: translateY(calc(100vh + 100px)) rotate(360deg); 
+    opacity: 0;
+  }
+}
+
+@keyframes nature-glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(74, 124, 40, 0.3);
+    border-color: rgba(74, 124, 40, 0.5);
+  }
+  50% { 
+    box-shadow: 0 0 40px rgba(74, 124, 40, 0.6);
+    border-color: rgba(74, 124, 40, 0.8);
+  }
+}
+
+@keyframes forest-breathe {
+  0%, 100% { 
+    background-position: 0% 50%;
+  }
+  50% { 
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes ripple {
+  0% { 
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  100% { 
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* Utility classes */
+.nature-gradient {
+  background: linear-gradient(135deg, var(--forest-green) 0%, var(--earth-green) 50%, var(--sage-green) 100%);
+}
+
+.earth-gradient {
+  background: linear-gradient(135deg, var(--earth-brown) 0%, var(--bark-brown) 50%, var(--soil-brown) 100%);
+}
+
+.forest-gradient {
+  background: linear-gradient(135deg, var(--shadow-green) 0%, var(--forest-green) 50%, var(--earth-green) 100%);
+}
+
+.mist-gradient {
+  background: linear-gradient(135deg, var(--forest-mist) 0%, #e8f5e8 25%, var(--nature-cream) 50%, #f0f8f0 75%, #e6f3e6 100%);
+}
+
+.sunset-gradient {
+  background: linear-gradient(135deg, #ff8c42 0%, #ffa500 50%, #ffb347 100%);
+}
+
+/* Nature-themed components */
+.nature-card {
+  background: linear-gradient(135deg, rgba(240, 255, 240, 0.95) 0%, rgba(250, 240, 230, 0.95) 50%, rgba(232, 245, 232, 0.95) 100%);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(74, 124, 40, 0.3);
+  box-shadow: 0 8px 32px rgba(74, 124, 40, 0.15);
+}
+
+.nature-button {
+  background: linear-gradient(135deg, var(--earth-green) 0%, var(--forest-canopy) 50%, var(--earth-green) 100%);
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(74, 124, 40, 0.4);
+}
+
+.nature-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(74, 124, 40, 0.5);
+  background: linear-gradient(135deg, var(--forest-canopy) 0%, var(--shadow-green) 50%, var(--forest-canopy) 100%);
+}
+
+/* Leaf animation for decorative elements */
+.leaf-decoration {
+  animation: leaf-sway 3s ease-in-out infinite;
+}
+
+/* Floating animation */
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Pulse animation for interactive elements */
+.pulse-nature {
+  animation: pulse-green 2s infinite;
+}
+
+/* Glow effect for important elements */
+.nature-glow {
+  animation: nature-glow 3s ease-in-out infinite;
+}
+
+/* Enhanced leaf animation */
+.leaf-float {
+  animation: leaf-fall 8s linear infinite;
+}
+
+/* Breathing background effect */
+.forest-breathe {
+  background-size: 200% 200%;
+  animation: forest-breathe 6s ease-in-out infinite;
+}
+
+/* Ripple effect for buttons */
+.nature-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.nature-ripple::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.nature-ripple:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Journey Page Specific Styles */
+.journey-container {
+  background: #000;
+  overflow: hidden;
+}
+
+.data-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.data-wave {
+  position: absolute;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+.data-ripple {
+  position: absolute;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.data-grid {
+  position: absolute;
+  background: linear-gradient(45deg, transparent 48%, rgba(255,255,255,0.05) 50%, transparent 52%);
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+
+.data-spiral {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.glow-cursor {
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+
+.chapter-indicator {
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.1em;
+}
+
+.insight-reveal {
+  backdrop-filter: blur(20px);
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Video Background Styles */
+#bgVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -2;
+}
+
+/* Theme Selector Styles */
+.theme-selector {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.theme-selector:focus {
+  background: rgba(255, 255, 255, 0.3);
+  outline: none;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.theme-selector option {
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 8px;
+}
+
+/* Floating Emoji Styles */
+.floating-emoji {
+  position: absolute;
+  font-weight: bold;
+  font-size: 2rem;
+  z-index: 20;
+  animation: emojiFloat 2s ease;
+}
+
+@keyframes emojiFloat {
+  from { 
+    transform: translateY(-10px) scale(0.8);
+    opacity: 0;
+  }
+  to { 
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Title Animation Styles */
+.animated-title {
+  font-family: "Arial Black", sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  margin: 0;
+  text-transform: uppercase;
+  text-align: center;
+  width: 100vw;
+  overflow: hidden;
+  white-space: nowrap;
+  background: linear-gradient(180deg, #000, #fff);
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 
+    1px 1px 2px rgba(0, 0, 0, 0.3),
+    2px 2px 4px rgba(0, 0, 0, 0.2),
+    3px 3px 6px rgba(0, 0, 0, 0.1),
+    4px 4px 8px rgba(0, 0, 0, 0.05);
+  -webkit-text-stroke: 0.5px rgba(84, 84, 84, 0.5);
+}
+
+/* Progress Indicator Styles */
+.progress-dot {
+  height: 8px;
+  border-radius: 4px;
+  transition: all 0.5s ease;
+}
+
+.progress-dot.active {
+  width: 64px;
+  background: white;
+}
+
+.progress-dot.inactive {
+  width: 32px;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Enhanced scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: linear-gradient(135deg, var(--forest-mist) 0%, var(--nature-cream) 100%);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--earth-green) 0%, var(--forest-canopy) 100%);
+  border-radius: 5px;
+  border: 2px solid var(--nature-cream);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--forest-canopy) 0%, var(--shadow-green) 100%);
+}
