@@ -10,6 +10,7 @@ interface SatelliteDataTabProps {
     cloudPercentage: number
   }) => void
   onDownloadImage: () => void
+  onDownloadTiff: () => void
   hasDrawnArea: boolean
   hasLoadedData: boolean
 }
@@ -17,6 +18,7 @@ interface SatelliteDataTabProps {
 export default function SatelliteDataTab({
   onLoadWmsLayer,
   onDownloadImage,
+  onDownloadTiff,
   hasDrawnArea,
   hasLoadedData
 }: SatelliteDataTabProps) {
@@ -149,20 +151,37 @@ export default function SatelliteDataTab({
               <span>{hasDrawnArea ? '🌍 Load Satellite Data' : '📍 Draw Area First'}</span>
             </button>
 
-            <button
-              onClick={onDownloadImage}
-              disabled={!hasLoadedData}
-              className={`w-full py-4 px-6 rounded-2xl transition-all duration-300 font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center space-x-3 ${
-                hasLoadedData
-                  ? 'bg-gradient-to-r from-emerald-600 to-green-700 text-white hover:from-emerald-700 hover:to-green-800'
-                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              }`}
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-              </svg>
-              <span>{hasLoadedData ? '📸 Download Map Image' : '📊 Load Data First'}</span>
-            </button>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                onClick={onDownloadImage}
+                disabled={!hasLoadedData}
+                className={`py-4 px-6 rounded-2xl transition-all duration-300 font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center space-x-2 ${
+                  hasLoadedData
+                    ? 'bg-gradient-to-r from-emerald-600 to-green-700 text-white hover:from-emerald-700 hover:to-green-800'
+                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                }`}
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                <span className="text-sm">{hasLoadedData ? '📸 PNG' : '📊 Load Data'}</span>
+              </button>
+
+              <button
+                onClick={onDownloadTiff}
+                disabled={!hasLoadedData}
+                className={`py-4 px-6 rounded-2xl transition-all duration-300 font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center space-x-2 ${
+                  hasLoadedData
+                    ? 'bg-gradient-to-r from-blue-600 to-indigo-700 text-white hover:from-blue-700 hover:to-indigo-800'
+                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                }`}
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+                <span className="text-sm">{hasLoadedData ? '🗂️ TIFF' : '📊 Load Data'}</span>
+              </button>
+            </div>
           </div>
 
           {hasDrawnArea && !hasLoadedData && (

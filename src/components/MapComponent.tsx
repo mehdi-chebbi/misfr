@@ -88,6 +88,14 @@ export default function MapComponent({ className = '' }: MapProps) {
     }
   }
 
+  // Handle download TIFF image
+  const handleDownloadTiff = () => {
+    const mapCore = (window as any).mapCore
+    if (mapCore && mapCore.downloadTiffImage) {
+      mapCore.downloadTiffImage()
+    }
+  }
+
   // Handle WMS layer loading
   const handleLoadWmsLayer = async (params: {
     layer: string
@@ -268,6 +276,7 @@ export default function MapComponent({ className = '' }: MapProps) {
             <SatelliteDataTab
               onLoadWmsLayer={handleLoadWmsLayer}
               onDownloadImage={handleDownloadImage}
+              onDownloadTiff={handleDownloadTiff}
               hasDrawnArea={hasDrawnArea}
               hasLoadedData={!!imageMetadata}
             />

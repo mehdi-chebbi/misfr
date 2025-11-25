@@ -355,6 +355,73 @@ export default function MapCore({
     }
   }
 
+  // Download WMS layer as TIFF
+  const downloadTiffImage = async () => {
+    if (!mapInstanceRef.current) return
+
+    try {
+      // Get current drawn bounds
+      const bounds = getDrawnBounds()
+      if (!bounds) {
+        alert('Please draw a polygon, rectangle, or circle on map first')
+        return
+      }
+
+      // Get the current WMS layer URL from image overlays
+      const mapContainer = mapInstanceRef.current.getContainer()
+      const imageOverlays = mapContainer.querySelectorAll('.leaflet-image-layer')
+      
+      if (imageOverlays.length === 0) {
+        alert('Please load satellite data first by selecting a layer and clicking "Load Satellite Data"')
+        return
+      }
+
+      // Find WMS image URL
+      let wmsUrl = ''
+      imageOverlays.forEach((overlay) => {
+        const img = overlay as HTMLImageElement
+        if (img.src && img.src.includes('copernicus.eu')) {
+          wmsUrl = img.src
+        }
+      })
+
+      if (!wmsUrl) {
+        alert('No satellite data found. Please load satellite data first.')
+        return
+      }
+
+      // Convert PNG URL to TIFF URL by changing the format parameter
+      const tiffUrl = wmsUrl.replace('FORMAT=image/png', 'FORMAT=image/tiff')
+
+      // Download TIFF image
+      const response = await fetch(tiffUrl)
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
+      const blob = await response.blob()
+      
+      // Create download link
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = `misfr-satellite-data-${new Date().toISOString().split('T')[0]}.tiff`
+      link.style.display = 'none'
+      
+      // Trigger download
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      
+      // Clean up
+      URL.revokeObjectURL(url)
+
+    } catch (error) {
+      console.error('Error downloading TIFF image:', error)
+      alert('Failed to download TIFF image. Please make sure you have loaded satellite data first.\n\nError: ' + (error as Error).message)
+    }
+  }
+
   // Expose drawing functions to parent via ref
   useEffect(() => {
     const mapCore = {
@@ -363,7 +430,8 @@ export default function MapCore({
       clearAllDrawings,
       addImageOverlay,
       getDrawnBounds,
-      downloadMapImage
+      downloadMapImage,
+      downloadTiffImage
     }
     
     // Store on window for parent access (simple approach for this refactor)
