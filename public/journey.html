@@ -138,17 +138,52 @@
         }
 
         .details > .cta > .discover {
-            border: 1px solid #ffffff;
-            background-color: transparent;
-            height: 36px;
-            border-radius: 99px;
-            color: #ffffff;
-            padding: 4px 24px;
-            font-size: 12px;
-            margin-left: 16px;
-            text-transform: uppercase;
-        }
+    /* --- Base Styles --- */
+    border: 1px solid #ffffff;
+    background-color: transparent; /* Start with a transparent background */
+    height: 50px; /* Keeping the bigger size */
+    border-radius: 99px;
+    color: #ffffff; /* Text is white on the transparent button */
+    padding: 4px 40px;
+    font-size: 16px;
+    font-weight: 700;
+    margin-left: 24px;
+    text-transform: uppercase;
+    cursor: pointer;
 
+    /* --- Animation Setup --- */
+    position: relative; /* Needed for the ::before pseudo-element */
+    z-index: 1;
+    overflow: hidden; /* Hides the background color outside the button */
+    transition: color 0.3s ease; /* Animate the text color change */
+}
+
+/* --- This is the magic part for the sliding background --- */
+.details > .cta > .discover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-color); /* The color that will slide in */
+    border-radius: 99px;
+    z-index: -1; /* Places the background behind the text */
+
+    /* This is the key to the animation! */
+    transform: translateX(-100%); /* Start completely off-screen to the left */
+    transition: transform 0.4s cubic-bezier(0.75, 0, 0.125, 1); /* Smooth, slightly bouncy slide-in */
+}
+/* --- Add this new CSS rule --- */
+.details > .cta > .discover:hover {
+    color: #1a1a1a; /* Change text to dark for contrast */
+    transform: scale(1.03); /* A very slight scale effect */
+}
+
+/* On hover, slide the background in from the left */
+.details > .cta > .discover:hover::before {
+    transform: translateX(0); /* Move the background to its original position */
+}
         nav {
             position: fixed;
             left: 0;
@@ -378,7 +413,7 @@
             />
           </svg>
         </button>
-        <button class="discover">Analyze Region</button>
+        <button class="discover">Explore Region</button>
       </div>
     </div>
 
@@ -405,46 +440,18 @@
             />
           </svg>
         </button>
-        <button class="discover">Analyze Region</button>
+        <button class="discover">Explore Region</button>
       </div>
     </div>
 
     <div class="pagination" id="pagination">
-      <div class="arrow arrow-left">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M15.75 19.5L8.25 12l7.5-7.5"
-          />
-        </svg>
-      </div>
-      <div class="arrow arrow-right">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M8.25 4.5l7.5 7.5-7.5 7.5"
-          />
-        </svg>
-      </div>
-      <div class="progress-sub-container" >
+    <div class="progress-sub-container" >
         <div class="progress-sub-background" >
             <div class="progress-sub-foreground" ></div>
         </div>
     </div>
     <div class="slide-numbers" id="slide-numbers"></div>
-    </div>
+</div>
 
     <div class="cover" ></div>
 
@@ -479,9 +486,9 @@
                 image:'https://www.safarisrwandasafari.com/wp-content/uploads/2022/10/ethiopia-rift-valley-aerial-view-sb10068596hq-001-5878cd753df78c17b65b7898-scaled.jpg'
             },
             {
-                place:'Cape Floristic Region - South Africa',
+                place:'Cape Floristic - South Africa',
                 title:'FLORA',
-                title2:'BIODIVERSITY HOTSPOT',
+                title2:'BIODIVERSITY',
                 description:'Unique ecosystem monitored for species conservation, habitat protection, and climate change impact studies.',
                 image:'https://www.capetown.travel/wp-content/uploads/Cape-towns-biodiversity-.jpg'
             },
